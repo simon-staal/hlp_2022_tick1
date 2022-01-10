@@ -12,11 +12,13 @@ let factorial n =
 
 // Not sure if this should be global or repeated within scope of cos and sin functions, 
 // could also be used in other taylor series
+// 
 let term x i = x ** float i / factorial i
 
 let cos n x =
     [ 0 .. n ]
     |> List.map
+        // Might be a bit long to be an anonymous function, not sure
         (fun i ->
             if i % 2 = 1 then 0.0
             else if i % 4 = 0 then term x i
@@ -26,6 +28,7 @@ let cos n x =
 let sin n x =
     [ 0 .. n ]
     |> List.map
+        // Might be a bit long to be an anonymous function, not sure
         (fun i ->
             if i % 2 = 0 then 0.0
             else if i % 4 = 1 then term x i
@@ -33,7 +36,6 @@ let sin n x =
     |> List.reduce (+)
 
 let polarToCartesianApprox (r, theta) n = (r * cos n theta, r * sin n theta)
-
 
 //--------------------testbench code - DO NOT CHANGE-----------------------------//
 
